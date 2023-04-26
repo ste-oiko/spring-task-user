@@ -19,11 +19,11 @@ public class User {
     @Id
     @GeneratedValue(generator = "uuid2")
     @Column(unique = true)
-    private UUID id;
+    public UUID id;
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name")
     private String firstname;
-    @Column(name = "surname", nullable = false)
+    @Column(name = "surname")
     private String surname;
     @Column(name = "address")
     private String address;
@@ -33,15 +33,15 @@ public class User {
     private String email;
     @Column(name = "personalID")
     private String personalID;
-    @Column(name = "date", nullable = false)
+    @Column(name = "date")
     private String date;
 
-    public void setDate() {
-        LocalDate currentDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String formattedDate = currentDate.format(formatter);
-        this.date = formattedDate;
-    }
+//    public void setDate() {
+//        LocalDate currentDate = LocalDate.now();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//        String formattedDate = currentDate.format(formatter);
+//        this.date = formattedDate;
+//    }
 
 
 }

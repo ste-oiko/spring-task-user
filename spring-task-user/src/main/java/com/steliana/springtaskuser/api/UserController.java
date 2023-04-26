@@ -7,11 +7,9 @@ import com.steliana.springtaskuser.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ConstraintViolation;
-import javax.validation.Valid;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import java.util.List;
@@ -32,12 +30,7 @@ public class UserController {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<UserResponse> getUser(@PathVariable("id") UUID id) {
-        UserResponse user = userService.getById(id);
-        if (user.equals(null)) {
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        } else {
-            throw new RecordNotFound();
-        }
+            return new ResponseEntity<>(userService.getById(id), HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")
@@ -47,7 +40,7 @@ public class UserController {
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity updateUser(@PathVariable("id") UUID id, @RequestBody UserRequest user){
+    public ResponseEntity updateUser(@PathVariable("id") UUID id,@RequestBody UserRequest user){
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<UserRequest>> violations = validator.validate(user);
         if(violations.isEmpty()) {
@@ -62,12 +55,13 @@ public class UserController {
 
     @PostMapping(path = "/")
     public ResponseEntity createUser(@RequestBody UserRequest user){
-//        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-//        Set<ConstraintViolation<UserRequest>> violations = validator.validate(user);
-//        if(violations.isEmpty()) {
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        Set<ConstraintViolation<UserRequest>> violations = validator.validate(user);
+
+        if(violations.isEmpty()) {
             User newUser = UserMapper.INSTANCE.userRequestToUser(user);
             userService.createUser(newUser);
             return new ResponseEntity(HttpStatus.OK);
-//        } else { return (ResponseEntity) ResponseEntity.status(HttpStatus.BAD_REQUEST).body(violations.iterator().next().getMessage());}
+        } else { return (ResponseEntity) ResponseEntity.status(HttpStatus.BAD_REQUEST).body(violations.iterator().next().getMessage());}
     }
 }
