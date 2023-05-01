@@ -36,12 +36,11 @@ public class User {
     @Column(name = "date")
     private String date;
 
-//    public void setDate() {
-//        LocalDate currentDate = LocalDate.now();
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//        String formattedDate = currentDate.format(formatter);
-//        this.date = formattedDate;
-//    }
+    public void setDate() {
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        this.date = currentDate.format(formatter);
+    }
 
 
 }
