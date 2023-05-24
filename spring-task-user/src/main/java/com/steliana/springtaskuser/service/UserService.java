@@ -18,13 +18,13 @@ public class UserService {
 
     public List<UserResponse> getAll() {
         List<User> users = userRepository.findAll();
-        if( !users.isEmpty() ) {
+//        users.add(new User());
+        if (!users.isEmpty()) {
             return UserMapper.INSTANCE.allUsersToUserResponse(users);
         } else {
             throw new RecordNotFound();
         }
     }
-
     public UserResponse getById(UUID id) {
         User user = userRepository.findById(id).orElseThrow(RecordNotFound::new);
         return UserMapper.INSTANCE.userToUserResponse(user);
@@ -48,7 +48,7 @@ public class UserService {
 
     public void createUser(User user) {
 
-            user.setDate();
+            user.setCreationDate();
             userRepository.save(user);
     }
 }

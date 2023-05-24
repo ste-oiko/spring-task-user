@@ -21,7 +21,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="spring-task-user" target="17" />
+      <module name="spring-task-user" target="19" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

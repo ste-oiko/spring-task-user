@@ -2,6 +2,7 @@ package com.steliana.springtaskuser.entity;
 
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,10 +11,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
+@Setter
+@EqualsAndHashCode
 @Entity
 @Table(name = "user2")
 @NoArgsConstructor
-@Getter @Setter
+@Getter
 public class User {
 
     @Id
@@ -27,21 +30,20 @@ public class User {
     private String surname;
     @Column(name = "address")
     private String address;
-    @Column(name = "phoneNumber")
+    @Column(name = "phone_number")
     private String phoneNumber;
     @Column(name = "email")
     private String email;
-    @Column(name = "personalID")
+    @Column(name = "personal_id")
     private String personalID;
-    @Column(name = "date")
-    private String date;
+    @Column(name = "creation_date")
+    private String creationDate;
 
-    public void setDate() {
+    public void setCreationDate() {
         LocalDate currentDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        this.date = currentDate.format(formatter);
+        this.creationDate = currentDate.format(formatter);
     }
-
 
 }
 

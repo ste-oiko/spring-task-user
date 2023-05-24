@@ -15,4 +15,15 @@ public class UserResponse {
     private String phoneNumber;
     private String email;
 
+    public UserResponse userResponse(String firstname, String surname, String address, String phoneNumber, String email){
+        UserResponse userResponse = new UserResponse();
+        userResponse.setFirstname(firstname);
+        userResponse.setSurname(surname);
+        userResponse.setAddress(address);
+        userResponse.setPhoneNumber(phoneNumber);
+        userResponse.setEmail(email);
+
+        return userResponse;
+    }
+
 }
